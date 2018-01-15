@@ -1,0 +1,128 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;\red255\green255\blue255;\red53\green53\blue53;}
+{\*\expandedcolortbl;;\cssrgb\c27059\c27059\c27059;}
+\margl1440\margr1440\vieww10800\viewh9000\viewkind0
+\deftab560
+\pard\tx720\pardeftab560\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf2 \
+
+\b Problem Statement:
+\b0 \
+You are given two s: N and K. Lun the dog is interested in strings that satisfy the following conditions:\
+\
+The string has exactly N characters, each of which is either 'A' or 'B'.\
+The string s has exactly K pairs (i, j) (0 <= i < j <= N-1) such that s[i] = 'A' and s[j] = 'B'.\
+If there exists a string that satisfies the conditions, find and return any such string. Otherwise, return an empty string.\
+\
+Definition\
+Class: AB\
+Method: createString\
+Parameters: \
+Returns: String\
+Method signature: \
+(be sure your method is public)\
+Limits\
+Time limit (s): 2.000\
+Memory limit (MB): 256\
+Constraints\
+- N will be between 2 and 50, inclusive.\
+- K will be between 0 and N(N-1)/2, inclusive.\
+Examples\
+0)\
+3\
+2\
+Returns: "ABB"\
+This string has exactly two pairs (i, j) mentioned in the statement: (0, 1) and (0, 2).\
+1)\
+2\
+0\
+Returns: "BA"\
+Please note that there are valid test cases with K = 0.\
+2)\
+5\
+8\
+Returns: ""\
+Five characters is too short for this value of K.\
+3)\
+10\
+12\
+Returns: "BAABBABAAB"\
+Please note that this is an example of a solution; other valid solutions will also be accepted.\
+\
+
+\b \
+\
+Code (Java)\
+\pard\pardeftab560\slleading20\partightenfactor0
+\cf2 =======================================
+\b0 \
+import java.util.*;\
+import java.lang.*;\
+import java.io.*;\
+import java.util.Scanner;\
+public class AB\
+\{\
+    public static String stringArray[];\
+    public static String createString(int N,int K)\{\
+        int pairs=0,loops=0;\
+        String resultingString="";\
+          stringArray = new String[N];\
+        if(K!=0)\{\
+        while(pairs!=K)\{\
+            for (int i=N-1;i>loops;i--)\{\
+                if(pairs!=K)\{\
+                    stringArray[i-1]="A";\
+                    stringArray[i]="B";\
+                    pairs++;\
+                \}else\{\
+                resultingString=convertArrayElementsToString(stringArray);\
+                \}\
+            \}\
+            if(pairs!=K)\{\
+                loops++;\
+                N--;\
+            \}else\{\
+                 resultingString=convertArrayElementsToString(stringArray);\
+           \}\
+        \}\
+        \}\
+        else\{\
+            stringArray[N-1]="A";\
+            resultingString=convertArrayElementsToString(stringArray);\
+            return resultingString;\
+        \}\
+        return resultingString;\
+    \}\
+    \
+    public static String convertArrayElementsToString(String[] Arr)\{\
+        String str="";\
+        for(int i=0;i<Arr.length;i++)\{\
+            if(Arr[i]=="A")\{\
+                str=str.concat("A");\
+            \}else\{\
+                str=str.concat("B");\
+            \}\
+        \}\
+        return str;\
+    \}\
+    \
+	public static void main (String[] args) throws java.lang.Exception\
+	\{\
+		Scanner sc=new Scanner(System.in);\
+		String result="";\
+		int n = sc.nextInt();\
+		int k= sc.nextInt();\
+	if(k>(n*n/4))\{\
+	   System.out.println("");\
+	\}\
+	else\{\
+	  result=createString(n,k);\
+	\}\
+			System.out.println("Output:\\n"+result);\
+	\}\
+\}\
+
+\b ====================================================\
+*********************************************}
